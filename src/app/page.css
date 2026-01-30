@@ -1,0 +1,46 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-split {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .layout-split {
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+.panel {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.link-panel {
+  background-color: var(--color-surface);
+  border-right: 1px solid #E5E7EB;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .link-panel {
+    max-width: 400px;
+    flex: 0 0 400px;
+  }
+}
+
+.right-panel {
+  background-color: #F3F4F6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}

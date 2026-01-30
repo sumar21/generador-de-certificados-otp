@@ -1,0 +1,250 @@
+.preview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 600px;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #374151;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #0B38D6;
+    color: white;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: background-color 0.2s;
+}
+
+.download-btn:hover:not(:disabled) {
+    background-color: #092EB0;
+}
+
+.download-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Certificate Paper Wrapper */
+.certificate-wrapper {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    aspect-ratio: 210 / 297;
+    background-color: transparent;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.certificate-a4 {
+    width: 100%;
+    height: 100%;
+    background-color: #0B38D6;
+    position: relative;
+    overflow: hidden;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    padding: 8% 6%;
+    /* Increased padding for better breathing room */
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.cert-frame {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cert-border-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-color: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.cert-border-corner.top-left {
+    top: 25px;
+    left: 25px;
+    border-width: 1px 0 0 1px;
+}
+
+.cert-border-corner.top-right {
+    top: 25px;
+    right: 25px;
+    border-width: 1px 1px 0 0;
+}
+
+.cert-border-corner.bottom-left {
+    bottom: 25px;
+    left: 25px;
+    border-width: 0 0 1px 1px;
+}
+
+.cert-border-corner.bottom-right {
+    bottom: 25px;
+    right: 25px;
+    border-width: 0 1px 1px 0;
+}
+
+.cert-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.cert-header {
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+}
+
+.cert-logo {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.cert-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.cert-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    color: #FFFFFF;
+    text-transform: none;
+}
+
+.cert-separator {
+    width: 40%;
+    height: 3px;
+    background-color: #C9FD2E;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.cert-subtitle {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+    margin-bottom: 0.75rem;
+    color: #FFFFFF;
+}
+
+.cert-player-name {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+    line-height: 1.1;
+    max-width: 95%;
+    word-wrap: break-word;
+    color: #FFFFFF;
+}
+
+.cert-description {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    opacity: 0.8;
+    max-width: 80%;
+    margin-bottom: 1.5rem;
+    color: #FFFFFF;
+}
+
+.cert-badge {
+    background-color: #C9FD2E;
+    color: #0B38D6;
+    padding: 1rem 1.75rem;
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4);
+    min-width: 150px;
+}
+
+.cert-category {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.cert-modality {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+    border-top: 1px solid rgba(11, 56, 214, 0.15);
+    padding-top: 0.4rem;
+    width: 100%;
+    letter-spacing: 0.05em;
+}
+
+.cert-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1rem;
+}
+
+.cert-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 0.6rem;
+    width: 60%;
+    color: #FFFFFF;
+}
+
+.date-value {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.date-label {
+    font-size: 0.65rem;
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+}
