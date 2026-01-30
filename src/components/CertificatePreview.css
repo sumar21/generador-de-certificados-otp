@@ -50,6 +50,10 @@
     background-color: transparent;
     box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
     position: relative;
+    /* On mobile, we might need to handle the shrinking better */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .certificate-a4 {
@@ -145,7 +149,7 @@
 }
 
 .cert-title {
-    font-size: 1.4rem;
+    font-size: clamp(1rem, 5vw, 1.4rem);
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 0.75rem;
@@ -162,7 +166,7 @@
 }
 
 .cert-subtitle {
-    font-size: 0.75rem;
+    font-size: clamp(0.6rem, 3vw, 0.75rem);
     text-transform: uppercase;
     letter-spacing: 0.2em;
     opacity: 0.6;
@@ -171,7 +175,7 @@
 }
 
 .cert-player-name {
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 8vw, 2.2rem);
     font-weight: 800;
     margin-bottom: 1.25rem;
     line-height: 1.1;
@@ -181,7 +185,7 @@
 }
 
 .cert-description {
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 3vw, 0.85rem);
     line-height: 1.4;
     opacity: 0.8;
     max-width: 80%;
@@ -199,11 +203,11 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4);
-    min-width: 150px;
+    min-width: 140px;
 }
 
 .cert-category {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 10vw, 2.75rem);
     font-weight: 800;
     line-height: 1;
 }
@@ -247,4 +251,24 @@
     opacity: 0.6;
     letter-spacing: 0.1em;
     margin-top: 0.2rem;
+}
+
+/* Mobile specific fixes */
+@media (max-width: 640px) {
+    .preview-container {
+        padding-bottom: 2rem;
+    }
+
+    .cert-logo {
+        height: 40px;
+    }
+
+    .cert-badge {
+        padding: 0.75rem 1.25rem;
+        min-width: 120px;
+    }
+
+    .cert-content {
+        padding-bottom: 2%;
+    }
 }
