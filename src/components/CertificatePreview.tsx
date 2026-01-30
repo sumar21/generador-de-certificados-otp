@@ -136,33 +136,39 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                     <div className="cert-border-corner bottom-right"></div>
 
                     <div className="cert-content">
-                        <div className="cert-header">
-                            <img src="/logo.png" alt="OTP Logo" style={{ height: '80px' }} />
+                        <div className="cert-header" style={{ marginTop: '40px' }}>
+                            <img src="/logo.png" alt="OTP Logo" style={{ height: '100px', width: 'auto' }} />
                         </div>
-                        <div className="cert-body">
-                            <h1 style={{ fontSize: '32px', fontWeight: 700, marginBottom: '16px', color: 'white' }}>
+                        <div className="cert-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <h1 style={{ fontSize: '42px', fontWeight: 800, lineHeight: 1.2, marginBottom: '20px', color: 'white', textAlign: 'center' }}>
                                 Certificado de Ascenso<br />de Categoría
                             </h1>
-                            <div className="cert-separator" style={{ width: '50%', height: '4px', backgroundColor: '#C9FD2E', marginBottom: '24px' }}></div>
-                            <p style={{ fontSize: '16px', opacity: 0.8, letterSpacing: '0.1em', marginBottom: '16px', color: 'white' }}>OTORGADO A</p>
-                            <div style={{ fontSize: '48px', fontWeight: 800, marginBottom: '24px', color: 'white' }}>
+                            <div style={{ width: '50%', height: '5px', backgroundColor: '#C9FD2E', borderRadius: '4px', marginBottom: '40px' }}></div>
+
+                            <p style={{ fontSize: '18px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em', opacity: 0.7, marginBottom: '20px', color: 'white' }}>
+                                OTORGADO A
+                            </p>
+
+                            <div style={{ fontSize: '64px', fontWeight: 800, marginBottom: '40px', color: 'white', textAlign: 'center', lineHeight: 1.1 }}>
                                 {playerName || 'Nombre del Jugador'}
                             </div>
-                            <p style={{ fontSize: '18px', opacity: 0.9, marginBottom: '32px', color: 'white' }}>
+
+                            <p style={{ fontSize: '20px', lineHeight: 1.5, opacity: 0.9, maxWidth: '80%', marginBottom: '40px', color: 'white', textAlign: 'center' }}>
                                 Por su excelente desempeño y dedicación deportiva,<br />
                                 ha sido oficialmente promovido/a a la categoría
                             </p>
-                            <div style={{ backgroundColor: '#C9FD2E', color: '#0B38D6', padding: '32px 48px', borderRadius: '24px', textAlign: 'center' }}>
-                                <div style={{ fontSize: '64px', fontWeight: 800, lineHeight: 1 }}>{categoria || '-'}</div>
-                                <div style={{ fontSize: '18px', fontWeight: 700, marginTop: '12px', borderTop: '2px solid rgba(11, 56, 214, 0.2)', paddingTop: '8px' }}>
+
+                            <div style={{ backgroundColor: '#C9FD2E', color: '#0B38D6', padding: '40px 60px', borderRadius: '32px', textAlign: 'center', boxShadow: '0 15px 35px rgba(0,0,0,0.3)', minWidth: '220px' }}>
+                                <div style={{ fontSize: '90px', fontWeight: 900, lineHeight: 1 }}>{categoria || '-'}</div>
+                                <div style={{ fontSize: '22px', fontWeight: 800, textTransform: 'uppercase', marginTop: '15px', borderTop: '2px solid rgba(11, 56, 214, 0.2)', paddingTop: '10px', width: '100%' }}>
                                     {modalidad.toUpperCase()}
                                 </div>
                             </div>
                         </div>
-                        <div className="cert-footer" style={{ marginTop: '32px' }}>
-                            <div className="cert-date" style={{ borderTop: '1px solid rgba(255,255,255,0.3)', paddingTop: '12px', width: '300px' }}>
-                                <p style={{ fontWeight: 600, fontSize: '18px', color: 'white' }}>{formattedDate}</p>
-                                <p style={{ fontSize: '12px', opacity: 0.7, color: 'white' }}>FECHA</p>
+                        <div className="cert-footer" style={{ marginTop: '40px', paddingBottom: '20px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', borderTop: '2px solid rgba(255,255,255,0.3)', paddingTop: '15px', width: '400px' }}>
+                                <p style={{ fontWeight: 700, fontSize: '24px', color: 'white' }}>{formattedDate}</p>
+                                <p style={{ fontSize: '14px', opacity: 0.7, letterSpacing: '0.1em', marginTop: '5px', color: 'white' }}>FECHA</p>
                             </div>
                         </div>
                     </div>
