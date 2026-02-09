@@ -3,6 +3,7 @@ import { toJpeg } from 'html-to-image';
 import { Download } from 'lucide-react';
 import './CertificatePreview.css';
 import type { Modalidad } from '../app/page';
+import { CATEGORIES } from '../app/page';
 
 // The logo is served from the public/ folder directly as /logo.png
 
@@ -23,6 +24,25 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
     const [loading, setLoading] = useState(false);
 
     const handleDownload = async () => {
+        // 1. Validar nombre
+        if (!playerName.trim()) {
+            alert('Por favor, ingresa el nombre del jugador.');
+            return;
+        }
+
+        // 2. Validar categoría
+        if (!categoria) {
+            alert('Por favor, selecciona una categoría.');
+            return;
+        }
+
+        // 3. Validar que la categoría sea válida para la modalidad
+        const validCategories = CATEGORIES[modalidad];
+        if (!validCategories.includes(categoria)) {
+            alert(`La categoría "${categoria}" no es válida para la modalidad ${modalidad}. Por favor, selecciona una categoría correcta.`);
+            return;
+        }
+
         const captureNode = document.getElementById('capture-node') as HTMLDivElement;
         if (!captureNode) return;
 

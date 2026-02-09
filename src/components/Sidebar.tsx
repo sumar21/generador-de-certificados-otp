@@ -1,6 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
 import type { Modalidad } from '../app/page';
+import { CATEGORIES } from '../app/page';
 
 interface SidebarProps {
     playerName: string;
@@ -12,22 +13,6 @@ interface SidebarProps {
     fecha: Date;
     setFecha: (value: Date) => void;
 }
-
-const CATEGORIES = {
-    Varones: ['C8', 'C7', 'C6', 'C5', 'C4', 'C3', 'C2'],
-    Damas: ['D7', 'D6', 'D5', 'D4', 'D3'],
-    Mixtos: [
-        'Suma 7',
-        'Suma 8',
-        'Suma 9',
-        'Suma 10',
-        'Suma 11',
-        'Suma 12',
-        'Suma 13',
-        'Suma 14',
-        'Suma 15',
-    ],
-};
 
 const Sidebar: React.FC<SidebarProps> = ({
     playerName,
@@ -79,7 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div className="form-group">
                 <label className="form-label">Modalidad</label>
                 <div className="segmented-control">
-                    {(['Varones', 'Damas', 'Mixtos'] as Modalidad[]).map((option) => (
+                    {(['Caballeros', 'Damas', 'Mixtos'] as Modalidad[]).map((option) => (
                         <button
                             key={option}
                             className={`segment-button ${modalidad === option ? 'active' : ''}`}
