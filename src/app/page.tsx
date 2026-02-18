@@ -43,21 +43,19 @@ export default function Home() {
             fecha={fecha}
             setFecha={setFecha}
           />
+          <CongratulationMessage
+            playerName={playerName}
+            modalidad={modalidad}
+            categoria={categoria}
+          />
         </div>
         <div className="panel right-panel">
-          <div className="right-panel-content">
-            <CertificatePreview
-              playerName={playerName}
-              modalidad={modalidad}
-              categoria={categoria}
-              fecha={fecha}
-            />
-            <CongratulationMessage
-              playerName={playerName}
-              modalidad={modalidad}
-              categoria={categoria}
-            />
-          </div>
+          <CertificatePreview
+            playerName={playerName}
+            modalidad={modalidad}
+            categoria={categoria}
+            fecha={fecha}
+          />
         </div>
       </div>
     </div>
