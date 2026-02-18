@@ -1,0 +1,71 @@
+/* ── Congratulation Message Card ── */
+.congratulation-card {
+    background-color: #FFFFFF;
+    border: 1px solid #EAEAEA;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.congratulation-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 14px;
+}
+
+.congratulation-textarea {
+    width: 100%;
+    min-height: 96px;
+    max-height: 160px;
+    resize: none;
+    background-color: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #374151;
+    font-family: inherit;
+    overflow-y: auto;
+    cursor: default;
+    outline: none;
+}
+
+.congratulation-textarea:focus {
+    border-color: #E5E7EB;
+}
+
+.congratulation-copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 14px;
+    padding: 0.7rem 1rem;
+    background-color: #4139CF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.congratulation-copy-btn:hover {
+    background-color: #342DB5;
+}
+
+.congratulation-copy-btn:active {
+    transform: scale(0.98);
+}
+
+.congratulation-copy-btn.copied {
+    background-color: #059669;
+    cursor: default;
+}

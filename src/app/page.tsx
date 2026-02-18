@@ -4,6 +4,7 @@ import { useState } from 'react';
 import './page.css';
 import Sidebar from '../components/Sidebar';
 import CertificatePreview from '../components/CertificatePreview';
+import CongratulationMessage from '../components/CongratulationMessage';
 
 export type Modalidad = 'Caballeros' | 'Damas' | 'Mixtos';
 
@@ -44,12 +45,19 @@ export default function Home() {
           />
         </div>
         <div className="panel right-panel">
-          <CertificatePreview
-            playerName={playerName}
-            modalidad={modalidad}
-            categoria={categoria}
-            fecha={fecha}
-          />
+          <div className="right-panel-content">
+            <CertificatePreview
+              playerName={playerName}
+              modalidad={modalidad}
+              categoria={categoria}
+              fecha={fecha}
+            />
+            <CongratulationMessage
+              playerName={playerName}
+              modalidad={modalidad}
+              categoria={categoria}
+            />
+          </div>
         </div>
       </div>
     </div>
