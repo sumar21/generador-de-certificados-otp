@@ -290,7 +290,9 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                     height: '80px', // Altura fija
                                     display: 'block',
                                     maxWidth: '200px',
-                                    filter: 'brightness(0) invert(1)', // FORZAR BLANCO
+                                    // Si tenemos logo mobile específico, asumimos que ya es blanco/correcto.
+                                    // Si usamos el fallback (logo desktop negro), lo invertimos a blanco.
+                                    filter: logoMobileBase64 ? 'none' : 'brightness(0) invert(1)',
                                 }}
                             />
                         </div>
