@@ -84,7 +84,18 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
             // Wait a bit for the layout to stabilize and Safari to paint the visible node
             await new Promise(resolve => setTimeout(resolve, 800));
 
-            // Options for html-to-image on the high-res hidden node
+            // Wait a bit for the layout to stabilize and Safari to paint the visible node
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            // Force image decoding explicitly for all images in the capture node
+            const images = Array.from(captureNode.getElementsByTagName('img'));
+            await Promise.all(images.map(img => {
+                if (img.complete) return Promise.resolve();
+                return new Promise(resolve => {
+                    img.onload = resolve;
+                    img.onerror = resolve;
+                });
+            }));
             const options = {
                 quality: 0.95,
                 pixelRatio: 2, // Mejor calidad para retina displays
@@ -265,22 +276,23 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             style={{
                                 marginTop: '10px',
                                 width: '100%',
-                                height: '90px',
+                                height: 'auto',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 marginBottom: '20px'
                             }}
                         >
-                            <div style={{
-                                width: '200px',
-                                height: '100%',
-                                // Usar el logo mobile preferentemente para la descarga, fallback al normal o path estático
-                                backgroundImage: `url(${logoMobileBase64 || logoBase64 || "/logo-mobile.png" || "/logo.png"})`,
-                                backgroundSize: 'contain',
-                                backgroundPosition: 'center',
-                                backgroundRepeat: 'no-repeat',
-                            }}></div>
+                            <img
+                                src={logoMobileBase64 || logoBase64 || "/logo-mobile.png"}
+                                alt="OTP Logo"
+                                crossOrigin="anonymous"
+                                style={{
+                                    width: '200px',
+                                    height: 'auto',
+                                    display: 'block',
+                                }}
+                            />
                         </div>
 
                         <div className="cert-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
