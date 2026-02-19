@@ -48,10 +48,20 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
 
         setLoading(true);
         try {
+            // Asegurar que las fuentes estén cargadas antes de capturar
+            await document.fonts.ready;
+
             // Options for html-to-image on the high-res hidden node
             const options = {
-                quality: 1,
-                pixelRatio: 1, // Already set to 794x1123, ratio 1 is enough
+                quality: 0.95,
+                pixelRatio: 2, // Mejor calidad para retina displays
+                width: 794,
+                height: 1123,
+                style: {
+                    transform: 'none', // Reset transforms
+                    borderRadius: '0',
+                    margin: '0',
+                },
             };
 
             const dataUrl = await toJpeg(captureNode, options);
@@ -62,6 +72,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
             link.click();
         } catch (err) {
             console.error('Error creating certificate image:', err);
+            alert('Hubo un error al generar la imagen. Por favor intenta de nuevo.');
         } finally {
             setLoading(false);
         }

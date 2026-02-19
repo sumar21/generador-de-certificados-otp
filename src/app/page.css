@@ -44,3 +44,12 @@
   align-items: center;
   padding: 2rem;
 }
+
+@media (max-width: 640px) {
+  .right-panel {
+    padding: 1rem;
+    align-items: flex-start;
+    /* Permitir scroll si es muy alto */
+    overflow-y: auto;
+  }
+}
