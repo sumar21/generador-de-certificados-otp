@@ -23,24 +23,27 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
     const certificateRef = useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState(false);
     const [logoBase64, setLogoBase64] = useState<string | null>(null);
+    const [logoMobileBase64, setLogoMobileBase64] = useState<string | null>(null);
     const [isCapturing, setIsCapturing] = useState(false);
 
-    // Convert logo to base64 to ensure it appears in the downloaded image (mobile fix)
+    // Convert logos to base64 to ensure they appear in the downloaded image
     useEffect(() => {
-        const convertLogo = async () => {
+        const convertLogo = async (url: string, setter: (val: string) => void) => {
             try {
-                const response = await fetch('/logo.png');
+                const response = await fetch(url);
                 const blob = await response.blob();
                 const reader = new FileReader();
                 reader.onloadend = () => {
-                    setLogoBase64(reader.result as string);
+                    setter(reader.result as string);
                 };
                 reader.readAsDataURL(blob);
             } catch (error) {
-                console.error('Error loading logo:', error);
+                console.error(`Error loading logo from ${url}:`, error);
             }
         };
-        convertLogo();
+
+        convertLogo('/logo.png', setLogoBase64);
+        convertLogo('/logo-mobile.png', setLogoMobileBase64);
     }, []);
 
     const actionVerb = modalidad === 'Damas' ? 'ascendida' : 'ascendido';
@@ -272,7 +275,8 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             <div style={{
                                 width: '200px',
                                 height: '100%',
-                                backgroundImage: `url(${logoBase64 || "/logo.png"})`,
+                                // Usar el logo mobile preferentemente para la descarga, fallback al normal o path estático
+                                backgroundImage: `url(${logoMobileBase64 || logoBase64 || "/logo-mobile.png" || "/logo.png"})`,
                                 backgroundSize: 'contain',
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',
