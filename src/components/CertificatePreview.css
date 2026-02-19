@@ -264,21 +264,4 @@
 }
 
 /* Mobile specific fixes */
-@media (max-width: 640px) {
-    .preview-container {
-        padding-bottom: 2rem;
-    }
-
-    .cert-logo {
-        height: 40px;
-    }
-
-    .cert-badge {
-        padding: 0.75rem 1.25rem;
-        min-width: 120px;
-    }
-
-    .cert-content {
-        padding-bottom: 2%;
-    }
-}
+/* Mobile specific fixes removed to ensure consistent A4 rendering matches desktop */

@@ -218,12 +218,15 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                     position: 'fixed',
                     top: 0,
                     left: 0,
-                    width: '0px',
-                    height: '0px',
+                    // FORZAR DIMENSIONES A4 COMPLETAS para evitar que mobile re-calcule el layout
+                    width: '794px',
+                    height: '1123px',
                     overflow: 'visible',
                     zIndex: isCapturing ? 9999 : -50,
                     opacity: isCapturing ? 1 : 0,
                     pointerEvents: 'none',
+                    // Fondo neutro por si acaso
+                    backgroundColor: 'transparent',
                 }}
             >
                 <div
@@ -234,15 +237,13 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                         minWidth: '794px',
                         height: '1123px',
                         minHeight: '1123px',
-                        padding: '70px 60px', // Aumentado padding
+                        padding: '70px 60px',
                         display: 'flex',
                         flexDirection: 'column',
                         transform: 'none',
-                        backgroundColor: '#0B38D6',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
+                        backgroundColor: '#0B38D6', // Azul OTP
                         margin: 0,
+                        position: 'relative', // Relative al container
                     }}
                 >
                     <div className="cert-frame"></div>
@@ -265,7 +266,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                marginBottom: '20px' // Aumentado margen
+                                marginBottom: '20px'
                             }}
                         >
                             <div style={{
@@ -300,7 +301,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             <div style={{
                                 backgroundColor: '#C9FD2E',
                                 color: '#0B38D6',
-                                padding: '25px 60px', // Aumentado padding horizontal del badge
+                                padding: '25px 60px',
                                 borderRadius: '28px',
                                 textAlign: 'center',
                                 boxShadow: '0 15px 35px rgba(0,0,0,0.3)',
