@@ -42,8 +42,8 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
             }
         };
 
-        convertLogo('/logo.png', setLogoBase64);
-        convertLogo('/logo-mobile.png', setLogoMobileBase64);
+        convertLogo('/logo.svg', setLogoBase64);
+        // convertLogo('/logo-mobile.png', setLogoMobileBase64); // Deprecated in favor of SVG
     }, []);
 
     const actionVerb = modalidad === 'Damas' ? 'ascendida' : 'ascendido';
@@ -283,16 +283,14 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             }}
                         >
                             <img
-                                src={logoMobileBase64 || logoBase64 || "/logo-mobile.png"}
+                                src={logoBase64 || "/logo.svg"}
                                 alt="OTP Logo"
                                 style={{
                                     width: 'auto',
                                     height: '80px', // Altura fija
                                     display: 'block',
                                     maxWidth: '200px',
-                                    // Si tenemos logo mobile específico, asumimos que ya es blanco/correcto.
-                                    // Si usamos el fallback (logo desktop negro), lo invertimos a blanco.
-                                    filter: logoMobileBase64 ? 'none' : 'brightness(0) invert(1)',
+                                    filter: 'brightness(0) invert(1)', // SVG forzado a BLANCO
                                 }}
                             />
                         </div>
