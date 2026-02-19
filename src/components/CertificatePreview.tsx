@@ -140,12 +140,25 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
 
                     <div className="cert-content">
                         {/* Header */}
-                        <div className="cert-header">
-                            <img
-                                src={logoBase64 || "/logo.png"}
-                                alt="OTP Logo"
-                                className="cert-logo"
-                            />
+                        <div
+                            className="cert-header"
+                            style={{
+                                width: '100%',
+                                height: '55px', // Altura fija para preview
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <div style={{
+                                width: '150px',
+                                height: '100%',
+                                backgroundImage: `url(${logoBase64 || "/logo.png"})`,
+                                backgroundSize: 'contain',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat',
+                                filter: 'brightness(0) invert(1)' // Mantener blanco en preview
+                            }}></div>
                         </div>
 
                         <div className="cert-body">
@@ -221,7 +234,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                         minWidth: '794px',
                         height: '1123px',
                         minHeight: '1123px',
-                        padding: '50px 50px', // Un poco más de margen lateral
+                        padding: '70px 60px', // Aumentado padding
                         display: 'flex',
                         flexDirection: 'column',
                         transform: 'none',
@@ -252,7 +265,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                marginBottom: '10px' // Espacio asegurado debajo del logo
+                                marginBottom: '20px' // Aumentado margen
                             }}
                         >
                             <div style={{
@@ -266,20 +279,20 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                         </div>
 
                         <div className="cert-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                            <h1 style={{ fontSize: '34px', fontWeight: 800, lineHeight: 1.2, marginBottom: '15px', color: 'white', textAlign: 'center' }}>
+                            <h1 style={{ fontSize: '34px', fontWeight: 800, lineHeight: 1.2, marginBottom: '20px', color: 'white', textAlign: 'center' }}>
                                 Certificado de Ascenso<br />de Categoría
                             </h1>
-                            <div style={{ width: '40%', height: '4px', backgroundColor: '#C9FD2E', borderRadius: '4px', marginBottom: '25px' }}></div>
+                            <div style={{ width: '40%', height: '4px', backgroundColor: '#C9FD2E', borderRadius: '4px', marginBottom: '30px' }}></div>
 
-                            <p style={{ fontSize: '15px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em', opacity: 0.7, marginBottom: '10px', color: 'white' }}>
+                            <p style={{ fontSize: '15px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em', opacity: 0.7, marginBottom: '15px', color: 'white' }}>
                                 OTORGADO A
                             </p>
 
-                            <div style={{ fontSize: '52px', fontWeight: 800, marginBottom: '20px', color: 'white', textAlign: 'center', lineHeight: 1.1 }}>
+                            <div style={{ fontSize: '54px', fontWeight: 800, marginBottom: '30px', color: 'white', textAlign: 'center', lineHeight: 1.1 }}>
                                 {playerName || 'Nombre del Jugador'}
                             </div>
 
-                            <p style={{ fontSize: '17px', lineHeight: 1.5, opacity: 0.9, maxWidth: '85%', marginBottom: '20px', color: 'white', textAlign: 'center' }}>
+                            <p style={{ fontSize: '18px', lineHeight: 1.5, opacity: 0.9, maxWidth: '80%', marginBottom: '30px', color: 'white', textAlign: 'center' }}>
                                 En virtud del nivel de juego observado y evaluado de acuerdo a nuestros criterios,<br />
                                 ha sido oficialmente {actionVerb} a la categoría
                             </p>
@@ -287,24 +300,24 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             <div style={{
                                 backgroundColor: '#C9FD2E',
                                 color: '#0B38D6',
-                                padding: '20px 50px',
+                                padding: '25px 60px', // Aumentado padding horizontal del badge
                                 borderRadius: '28px',
                                 textAlign: 'center',
                                 boxShadow: '0 15px 35px rgba(0,0,0,0.3)',
-                                minWidth: '200px',
-                                marginBottom: '10px'
+                                minWidth: '220px',
+                                marginBottom: '20px'
                             }}>
-                                <div style={{ fontSize: '75px', fontWeight: 900, lineHeight: 1 }}>{categoria || '-'}</div>
+                                <div style={{ fontSize: '80px', fontWeight: 900, lineHeight: 1 }}>{categoria || '-'}</div>
                                 <div style={{ fontSize: '18px', fontWeight: 800, textTransform: 'uppercase', marginTop: '8px', borderTop: '2px solid rgba(11, 56, 214, 0.2)', paddingTop: '8px', width: '100%' }}>
                                     {modalidad.toUpperCase()}
                                 </div>
                             </div>
 
-                            <p style={{ fontSize: '11px', lineHeight: 1.3, opacity: 0.6, maxWidth: '90%', marginTop: '25px', color: 'white', textAlign: 'center' }}>
+                            <p style={{ fontSize: '12px', lineHeight: 1.4, opacity: 0.6, maxWidth: '85%', marginTop: '35px', color: 'white', textAlign: 'center' }}>
                                 La participación en una categoría inferior sin consulta previa a la organización podrá derivar en descalificación del torneo y/o anulación de premios en caso de detectarse con posterioridad. La nueva categoría aplica también para la suma en torneos mixtos.
                             </p>
                         </div>
-                        <div className="cert-footer" style={{ marginTop: '10px', paddingBottom: '10px' }}>
+                        <div className="cert-footer" style={{ marginTop: '20px', paddingBottom: '10px' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', borderTop: '2px solid rgba(255,255,255,0.3)', paddingTop: '10px', width: '350px' }}>
                                 <p style={{ fontWeight: 700, fontSize: '20px', color: 'white' }}>{formattedDate}</p>
                                 <p style={{ fontSize: '11px', opacity: 0.7, letterSpacing: '0.1em', marginTop: '4px', color: 'white' }}>FECHA</p>
