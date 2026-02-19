@@ -165,7 +165,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             }}
                         >
                             <div style={{
-                                width: '150px',
+                                width: '220px',
                                 height: '100%',
                                 backgroundImage: `url(${logoBase64 || "/logo.png"})`,
                                 backgroundSize: 'contain',
@@ -287,9 +287,9 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                 alt="OTP Logo"
                                 style={{
                                     width: 'auto',
-                                    height: '80px', // Altura fija
+                                    height: '140px', // Altura aumentada para mayor visibilidad
                                     display: 'block',
-                                    maxWidth: '200px',
+                                    maxWidth: '400px',
                                     filter: 'brightness(0) invert(1)', // SVG forzado a BLANCO
                                 }}
                             />
