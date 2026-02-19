@@ -189,21 +189,24 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                 When capturing, it covers the screen (z-index 9999) to force rendering, 
                 otherwise it's hidden but kept in DOM.
             */}
+            {/* 
+                Hidden High-Res Clone for Capture 
+                We use 'isCapturing' state to toggle visibility. 
+                When capturing, it covers the screen (z-index 9999) to force rendering, 
+                otherwise it's hidden but kept in DOM.
+            */}
             <div
                 id="capture-container"
                 style={{
                     position: 'fixed',
                     top: 0,
                     left: 0,
-                    width: '100vw',
-                    height: '100vh',
+                    width: '0px', // Zero width container
+                    height: '0px',
+                    overflow: 'visible', // Let content overflow
                     zIndex: isCapturing ? 9999 : -50,
                     opacity: isCapturing ? 1 : 0,
                     pointerEvents: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: '#F3F4F6', // Fondo neutro mientras genera
                 }}
             >
                 <div
@@ -211,13 +214,18 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                     className="certificate-a4"
                     style={{
                         width: '794px',
+                        minWidth: '794px', // Force correct width
                         height: '1123px',
+                        minHeight: '1123px',
                         padding: '60px 40px',
                         display: 'flex',
                         flexDirection: 'column',
-                        transform: isCapturing && window.innerWidth < 800 ? `scale(${window.innerWidth / 850})` : 'scale(1)', // Ajuste visual si se muestra en mobile
+                        transform: 'none', // No scaling
                         backgroundColor: '#0B38D6', // Force background
-                        boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        margin: 0,
                     }}
                 >
                     <div className="cert-frame"></div>
