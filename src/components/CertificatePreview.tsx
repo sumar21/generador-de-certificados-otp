@@ -72,6 +72,9 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
             // Asegurar que las fuentes estén cargadas antes de capturar
             await document.fonts.ready;
 
+            // Wait a bit specifically for iOS to render the hidden node properly
+            await new Promise(resolve => setTimeout(resolve, 500));
+
             // Options for html-to-image on the high-res hidden node
             const options = {
                 quality: 0.95,
@@ -83,6 +86,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                     borderRadius: '0',
                     margin: '0',
                 },
+                cacheBust: true,
             };
 
             const dataUrl = await toJpeg(captureNode, options);
@@ -130,7 +134,12 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                     <div className="cert-content">
                         {/* Header */}
                         <div className="cert-header">
-                            <img src={logoBase64 || "/logo.png"} alt="OTP Logo" className="cert-logo" />
+                            <img
+                                src={logoBase64 || "/logo.png"}
+                                alt="OTP Logo"
+                                className="cert-logo"
+                                crossOrigin="anonymous"
+                            />
                         </div>
 
                         <div className="cert-body">
@@ -169,7 +178,22 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
             </div>
 
             {/* Hidden High-Res Clone for Capture */}
-            <div style={{ position: 'absolute', top: '-10000px', left: '-10000px' }}>
+            {/*
+                CRITICAL FIX FOR MOBILE:
+                Instead of moving it off-screen with large negative coordinates (which Safari optimizes away),
+                we make it fixed, transparent, and behind everything. This forces the browser to render it.
+            */}
+            <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                zIndex: -50,
+                opacity: 0,
+                pointerEvents: 'none',
+                overflow: 'hidden',
+                width: '1px', // Minimal footprint in layout
+                height: '1px'
+            }}>
                 <div
                     id="capture-node"
                     className="certificate-a4"
@@ -178,7 +202,9 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                         height: '1123px',
                         padding: '60px 40px',
                         display: 'flex',
-                        flexDirection: 'column'
+                        flexDirection: 'column',
+                        transform: 'scale(1)', // Ensure no scaling affects the capture source
+                        backgroundColor: '#0B38D6' // Force background
                     }}
                 >
                     <div className="cert-frame"></div>
@@ -189,7 +215,12 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
 
                     <div className="cert-content">
                         <div className="cert-header" style={{ marginTop: '40px' }}>
-                            <img src={logoBase64 || "/logo.png"} alt="OTP Logo" style={{ height: '100px', width: 'auto' }} />
+                            <img
+                                src={logoBase64 || "/logo.png"}
+                                alt="OTP Logo"
+                                style={{ height: '100px', width: 'auto' }}
+                                crossOrigin="anonymous"
+                            />
                         </div>
                         <div className="cert-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                             <h1 style={{ fontSize: '42px', fontWeight: 800, lineHeight: 1.2, marginBottom: '20px', color: 'white', textAlign: 'center' }}>
