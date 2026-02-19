@@ -23,6 +23,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
     const certificateRef = useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState(false);
     const [logoBase64, setLogoBase64] = useState<string | null>(null);
+    const [isCapturing, setIsCapturing] = useState(false);
 
     // Convert logo to base64 to ensure it appears in the downloaded image (mobile fix)
     useEffect(() => {
@@ -65,15 +66,20 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
         }
 
         const captureNode = document.getElementById('capture-node') as HTMLDivElement;
-        if (!captureNode) return;
+        const captureContainer = document.getElementById('capture-container') as HTMLDivElement;
+
+        if (!captureNode || !captureContainer) return;
 
         setLoading(true);
+        // Force the capture node to be visible on top of everything to ensure rendering
+        setIsCapturing(true);
+
         try {
             // Asegurar que las fuentes estén cargadas antes de capturar
             await document.fonts.ready;
 
-            // Wait a bit specifically for iOS to render the hidden node properly
-            await new Promise(resolve => setTimeout(resolve, 500));
+            // Wait a bit for the layout to stabilize and Safari to paint the visible node
+            await new Promise(resolve => setTimeout(resolve, 800));
 
             // Options for html-to-image on the high-res hidden node
             const options = {
@@ -100,6 +106,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
             alert('Hubo un error al generar la imagen. Por favor intenta de nuevo.');
         } finally {
             setLoading(false);
+            setIsCapturing(false);
         }
     };
 
@@ -138,7 +145,6 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                 src={logoBase64 || "/logo.png"}
                                 alt="OTP Logo"
                                 className="cert-logo"
-                                crossOrigin="anonymous"
                             />
                         </div>
 
@@ -177,23 +183,29 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                 </div>
             </div>
 
-            {/* Hidden High-Res Clone for Capture */}
-            {/*
-                CRITICAL FIX FOR MOBILE:
-                Instead of moving it off-screen with large negative coordinates (which Safari optimizes away),
-                we make it fixed, transparent, and behind everything. This forces the browser to render it.
+            {/* 
+                Hidden High-Res Clone for Capture 
+                We use 'isCapturing' state to toggle visibility. 
+                When capturing, it covers the screen (z-index 9999) to force rendering, 
+                otherwise it's hidden but kept in DOM.
             */}
-            <div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                zIndex: -50,
-                opacity: 0,
-                pointerEvents: 'none',
-                overflow: 'hidden',
-                width: '1px', // Minimal footprint in layout
-                height: '1px'
-            }}>
+            <div
+                id="capture-container"
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    zIndex: isCapturing ? 9999 : -50,
+                    opacity: isCapturing ? 1 : 0,
+                    pointerEvents: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#F3F4F6', // Fondo neutro mientras genera
+                }}
+            >
                 <div
                     id="capture-node"
                     className="certificate-a4"
@@ -203,8 +215,9 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                         padding: '60px 40px',
                         display: 'flex',
                         flexDirection: 'column',
-                        transform: 'scale(1)', // Ensure no scaling affects the capture source
-                        backgroundColor: '#0B38D6' // Force background
+                        transform: isCapturing && window.innerWidth < 800 ? `scale(${window.innerWidth / 850})` : 'scale(1)', // Ajuste visual si se muestra en mobile
+                        backgroundColor: '#0B38D6', // Force background
+                        boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
                     }}
                 >
                     <div className="cert-frame"></div>
@@ -219,7 +232,6 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                 src={logoBase64 || "/logo.png"}
                                 alt="OTP Logo"
                                 style={{ height: '100px', width: 'auto' }}
-                                crossOrigin="anonymous"
                             />
                         </div>
                         <div className="cert-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
