@@ -268,8 +268,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
 
                     <div className="cert-content">
                         {/* 
-                            USAMOS BACKGROUND IMAGE PARA EL LOGO 
-                            Esto es más robusto en Safari mobile para html-to-image
+                            USAMOS IMG NORMAL CON FILTER PARAasegurar contraste (blanco sobre azul)
                         */}
                         <div
                             className="cert-header"
@@ -286,11 +285,12 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             <img
                                 src={logoMobileBase64 || logoBase64 || "/logo-mobile.png"}
                                 alt="OTP Logo"
-                                crossOrigin="anonymous"
                                 style={{
-                                    width: '200px',
-                                    height: 'auto',
+                                    width: 'auto',
+                                    height: '80px', // Altura fija
                                     display: 'block',
+                                    maxWidth: '200px',
+                                    filter: 'brightness(0) invert(1)', // FORZAR BLANCO
                                 }}
                             />
                         </div>
