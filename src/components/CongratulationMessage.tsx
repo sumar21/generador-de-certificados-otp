@@ -11,18 +11,18 @@ interface CongratulationMessageProps {
 
 /**
  * Devuelve la categoría máxima según la modalidad.
- * Caballeros → C9
- * Damas → D8
- * Mixtos → Suma 16
+ * Caballeros → C3
+ * Damas → D4
+ * Mixtos → Suma 7
  */
 function getCategoriaMaxima(modalidad: Modalidad): string {
     switch (modalidad) {
         case 'Caballeros':
-            return 'C9';
+            return 'C3';
         case 'Damas':
-            return 'D8';
+            return 'D4';
         case 'Mixtos':
-            return 'Suma 16';
+            return 'Suma 7';
     }
 }
 

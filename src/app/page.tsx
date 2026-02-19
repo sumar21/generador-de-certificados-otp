@@ -9,9 +9,11 @@ import CongratulationMessage from '../components/CongratulationMessage';
 export type Modalidad = 'Caballeros' | 'Damas' | 'Mixtos';
 
 export const CATEGORIES: Record<Modalidad, string[]> = {
-  Caballeros: ['C3/C4', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9'],
-  Damas: ['D4/D5', 'D6', 'D7/D8', 'D8'],
+  Caballeros: ['C3', 'C3/C4', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9'],
+  Damas: ['D4', 'D4/D5', 'D6', 'D7/D8', 'D8'],
   Mixtos: [
+    'Suma 7',
+    'Suma 8',
     'Suma 9',
     'Suma 10',
     'Suma 11',
