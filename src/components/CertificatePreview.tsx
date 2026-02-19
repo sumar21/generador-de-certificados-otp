@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { toJpeg } from 'html-to-image';
 import { Download } from 'lucide-react';
 import './CertificatePreview.css';
@@ -22,6 +22,27 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
 }) => {
     const certificateRef = useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState(false);
+    const [logoBase64, setLogoBase64] = useState<string | null>(null);
+
+    // Convert logo to base64 to ensure it appears in the downloaded image (mobile fix)
+    useEffect(() => {
+        const convertLogo = async () => {
+            try {
+                const response = await fetch('/logo.png');
+                const blob = await response.blob();
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setLogoBase64(reader.result as string);
+                };
+                reader.readAsDataURL(blob);
+            } catch (error) {
+                console.error('Error loading logo:', error);
+            }
+        };
+        convertLogo();
+    }, []);
+
+    const actionVerb = modalidad === 'Damas' ? 'promovida' : 'promovido';
 
     const handleDownload = async () => {
         // 1. Validar nombre
@@ -109,7 +130,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                     <div className="cert-content">
                         {/* Header */}
                         <div className="cert-header">
-                            <img src="/logo.png" alt="OTP Logo" className="cert-logo" />
+                            <img src={logoBase64 || "/logo.png"} alt="OTP Logo" className="cert-logo" />
                         </div>
 
                         <div className="cert-body">
@@ -125,7 +146,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
 
                             <p className="cert-description">
                                 Por su excelente desempeño y dedicación deportiva,<br />
-                                ha sido oficialmente promovido/a a la categoría
+                                ha sido oficialmente {actionVerb} a la categoría
                             </p>
 
                             <div className="cert-badge">
@@ -168,7 +189,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
 
                     <div className="cert-content">
                         <div className="cert-header" style={{ marginTop: '40px' }}>
-                            <img src="/logo.png" alt="OTP Logo" style={{ height: '100px', width: 'auto' }} />
+                            <img src={logoBase64 || "/logo.png"} alt="OTP Logo" style={{ height: '100px', width: 'auto' }} />
                         </div>
                         <div className="cert-body" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                             <h1 style={{ fontSize: '42px', fontWeight: 800, lineHeight: 1.2, marginBottom: '20px', color: 'white', textAlign: 'center' }}>
@@ -186,7 +207,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
 
                             <p style={{ fontSize: '20px', lineHeight: 1.5, opacity: 0.9, maxWidth: '80%', marginBottom: '40px', color: 'white', textAlign: 'center' }}>
                                 Por su excelente desempeño y dedicación deportiva,<br />
-                                ha sido oficialmente promovido/a a la categoría
+                                ha sido oficialmente {actionVerb} a la categoría
                             </p>
 
                             <div style={{ backgroundColor: '#C9FD2E', color: '#0B38D6', padding: '40px 60px', borderRadius: '32px', textAlign: 'center', boxShadow: '0 15px 35px rgba(0,0,0,0.3)', minWidth: '220px' }}>

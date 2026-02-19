@@ -51,15 +51,30 @@ const CongratulationMessage: React.FC<CongratulationMessageProps> = ({
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch {
-            // Fallback para navegadores sin Clipboard API
+            // Fallback robusto para dispositivos móviles
             const textarea = document.createElement('textarea');
             textarea.value = mensaje;
+
+            // Estilos para evitar scroll y zoom en mobile
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '0';
+            textarea.setAttribute('readonly', '');
+
             document.body.appendChild(textarea);
+
             textarea.select();
-            document.execCommand('copy');
+            textarea.setSelectionRange(0, 99999); // Crucial para iOS
+
+            try {
+                document.execCommand('copy');
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            } catch (e) {
+                console.error('Error al copiar manualmente', e);
+            }
+
             document.body.removeChild(textarea);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 2000);
         }
     };
 
