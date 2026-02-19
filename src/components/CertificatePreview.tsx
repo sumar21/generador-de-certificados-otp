@@ -43,7 +43,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
         convertLogo();
     }, []);
 
-    const actionVerb = modalidad === 'Damas' ? 'promovida' : 'promovido';
+    const actionVerb = modalidad === 'Damas' ? 'ascendida' : 'ascendido';
 
     const handleDownload = async () => {
         // 1. Validar nombre
@@ -160,7 +160,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             </div>
 
                             <p className="cert-description">
-                                Por su excelente desempeño y dedicación deportiva,<br />
+                                En virtud del nivel de juego observado y evaluado de acuerdo a nuestros criterios,<br />
                                 ha sido oficialmente {actionVerb} a la categoría
                             </p>
 
@@ -168,6 +168,10 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                 <div className="cert-category">{categoria || '-'}</div>
                                 <div className="cert-modality">{modalidad.toUpperCase()}</div>
                             </div>
+
+                            <p className="cert-small-print">
+                                La participación en una categoría inferior sin consulta previa a la organización podrá derivar en descalificación del torneo y/o anulación de premios en caso de detectarse con posterioridad. La nueva categoría aplica también para la suma en torneos mixtos.
+                            </p>
                         </div>
 
                         <div className="cert-footer">
@@ -257,7 +261,7 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             </div>
 
                             <p style={{ fontSize: '20px', lineHeight: 1.5, opacity: 0.9, maxWidth: '80%', marginBottom: '40px', color: 'white', textAlign: 'center' }}>
-                                Por su excelente desempeño y dedicación deportiva,<br />
+                                En virtud del nivel de juego observado y evaluado de acuerdo a nuestros criterios,<br />
                                 ha sido oficialmente {actionVerb} a la categoría
                             </p>
 
@@ -267,6 +271,10 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                     {modalidad.toUpperCase()}
                                 </div>
                             </div>
+
+                            <p style={{ fontSize: '12px', lineHeight: 1.4, opacity: 0.6, maxWidth: '80%', marginTop: '40px', color: 'white', textAlign: 'center' }}>
+                                La participación en una categoría inferior sin consulta previa a la organización podrá derivar en descalificación del torneo y/o anulación de premios en caso de detectarse con posterioridad. La nueva categoría aplica también para la suma en torneos mixtos.
+                            </p>
                         </div>
                         <div className="cert-footer" style={{ marginTop: '40px', paddingBottom: '20px' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', borderTop: '2px solid rgba(255,255,255,0.3)', paddingTop: '15px', width: '400px' }}>

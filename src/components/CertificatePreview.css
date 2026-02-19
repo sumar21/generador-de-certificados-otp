@@ -223,6 +223,16 @@
     letter-spacing: 0.05em;
 }
 
+.cert-small-print {
+    font-size: clamp(0.45rem, 2vw, 0.55rem);
+    line-height: 1.3;
+    opacity: 0.6;
+    max-width: 95%;
+    margin-top: 1.5rem;
+    color: #FFFFFF;
+    text-align: center;
+}
+
 .cert-footer {
     width: 100%;
     display: flex;

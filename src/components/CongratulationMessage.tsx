@@ -42,7 +42,7 @@ const CongratulationMessage: React.FC<CongratulationMessageProps> = ({
             return `🏆 Felicitaciones ${nombre} por alcanzar la categoría máxima ${categoria} (${modalidad}).\nEste logro refleja tu nivel, constancia y competitividad.\nAhora toca defender lo conseguido.`;
         }
 
-        return `🎉 Felicitaciones ${nombre} por tu ascenso a ${categoria || '—'} (${modalidad}).\nTu desempeño y compromiso hicieron que este logro sea totalmente merecido.\n¡Nos vemos en la próxima categoría!`;
+        return `🎉 Felicitaciones ${nombre} por tu ascenso a ${categoria || '—'} (${modalidad}).\n¡Nos vemos en la siguiente categoría!`;
     }, [playerName, modalidad, categoria, esCategoriaMaxima]);
 
     const handleCopy = async () => {
