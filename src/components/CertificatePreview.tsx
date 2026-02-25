@@ -158,14 +158,14 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                             className="cert-header"
                             style={{
                                 width: '100%',
-                                height: '55px', // Altura fija para preview
+                                height: '110px', // Altura fija para preview (x2)
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}
                         >
                             <div style={{
-                                width: '220px',
+                                width: '440px',
                                 height: '100%',
                                 backgroundImage: `url(${logoBase64 || "/logo.png"})`,
                                 backgroundSize: 'contain',
@@ -287,9 +287,9 @@ const CertificatePreview: React.FC<CertificatePreviewProps> = ({
                                 alt="OTP Logo"
                                 style={{
                                     width: 'auto',
-                                    height: '140px', // Altura aumentada para mayor visibilidad
+                                    height: '280px', // Altura duplicada (x2)
                                     display: 'block',
-                                    maxWidth: '400px',
+                                    maxWidth: '800px',
                                     filter: 'brightness(0) invert(1)', // SVG forzado a BLANCO
                                 }}
                             />
